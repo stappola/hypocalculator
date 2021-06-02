@@ -14,12 +14,10 @@ HypoCalculator::HypoCalculator(const string& input, const string output)
     , _outputFile(output)
 {
     cout << "Input: " << _inputFile << " Output: " << _outputFile << endl;
-    // _infile.exceptions(ifstream::badbit | ifstream::failbit);
 }
 
 HypoCalculator::~HypoCalculator()
 {
-
 }
 
 void HypoCalculator::calculate()
@@ -69,18 +67,11 @@ void HypoCalculator::sort()
 
 void HypoCalculator::storeResults()
 {
-    cout << "HypoCalculator::storeResults()" << endl;
-
     ofstream outfile;
 
     try
     {
-        cout << "About to open output file" << endl;
-
         outfile.open(_outputFile, ios::out | ios::ate);
-
-        cout << "Opened output file" << endl;
-
         outfile << LEG_A << " " << LEG_B << " " << HYPOTENUSE << endl;
 
         vector<TriangleData>::iterator itr;
@@ -92,8 +83,6 @@ void HypoCalculator::storeResults()
         }
 
         outfile.flush();
-        cout << "Wrote output data" << endl;
-
         outfile.close();
     }
     catch(const std::exception& e)
@@ -105,8 +94,6 @@ void HypoCalculator::storeResults()
 
 bool HypoCalculator::readInput()
 {
-    cout << "HypoCalculator::readInput()" << endl;
-
     if(readInputData() == 0)
     {
         cout << "Reading of input data failed" << endl;
@@ -136,8 +123,6 @@ bool HypoCalculator::readInput()
             std::cerr << e.what() << '\n';
         }
     }
-
-    cout << "Reading complete" << endl;
 
     _infile.close();
 }

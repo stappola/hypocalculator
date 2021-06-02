@@ -33,7 +33,6 @@ class HypoCalculator
         vector<pair<string, string> > legLengthsStr;
         vector<TriangleData> _results;
         ifstream _infile;
-
 };
 
 
