@@ -35,6 +35,10 @@ Makefile
 *.app
 
 # Directories to ignore
+.vscode/
 build/
 googletest/
 CMakeFiles/
+
+# Outputted test data
+output.txt

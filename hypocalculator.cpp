@@ -13,7 +13,6 @@ HypoCalculator::HypoCalculator(const string& input, const string output)
     : _inputFile(input)
     , _outputFile(output)
 {
-    cout << "Input: " << _inputFile << " Output: " << _outputFile << endl;
 }
 
 HypoCalculator::~HypoCalculator()
@@ -22,6 +21,12 @@ HypoCalculator::~HypoCalculator()
 
 void HypoCalculator::calculate()
 {
+    // If there is no raw data to process, quit right away
+    if(legLengthsStr.empty())
+    {
+        throw std::logic_error("No valid data to process!");
+    }
+
     compileValidData();
 
     vector<TriangleData>::iterator legItr;
@@ -60,14 +65,27 @@ void HypoCalculator::compileValidData()
     }
 }
 
-void HypoCalculator::sort()
+bool HypoCalculator::sort()
 {
-    std::sort (_results.begin(), _results.end());
+    bool validState{false};
+
+    if(_results.size() > 0)
+    {
+        std::sort (_results.begin(), _results.end());
+        validState = true;
+    }
+    
+    return validState;
 }
 
 void HypoCalculator::storeResults()
 {
     ofstream outfile;
+
+    if(_results.empty())
+    {
+        throw std::logic_error("No processed data to output!");
+    }
 
     try
     {
@@ -94,10 +112,11 @@ void HypoCalculator::storeResults()
 
 bool HypoCalculator::readInput()
 {
+    bool validInput{false};
+
     if(readInputData() == 0)
     {
         cout << "Reading of input data failed" << endl;
-        return false;
     }
     else
     {
@@ -122,20 +141,27 @@ bool HypoCalculator::readInput()
             cout << "Leg A: " << legA << " Leg B: " << legB << endl;
             std::cerr << e.what() << '\n';
         }
+
+        _infile.close();
+        validInput = true;
     }
 
-    _infile.close();
+    return validInput;
 }
 
 int HypoCalculator::readInputData()
 {
     int fileSize{0};
 
+    if(_inputFile.empty())
+    {
+        throw std::length_error("Invalid input data!");
+    }
+
     try
     {
         _infile.open(_inputFile, ios::in | ios::ate);
         fileSize = _infile.tellg();
-        cout << "Input data size: " << fileSize << endl;
         _infile.seekg(0);
     }
     catch(const std::exception& e)

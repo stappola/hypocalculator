@@ -19,7 +19,7 @@ class HypoCalculator
     public:
         bool readInput();
         void calculate();
-        void sort();
+        bool sort();
         void storeResults();
     
     // Private helpers

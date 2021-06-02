@@ -32,7 +32,6 @@ public:
 
     virtual void OnTestEnd(const ::testing::TestInfo& ti)
     {
-        std::cout << ti.result()->Passed(), "*** OUTPUT FROM FAILED TEST:\n";
     }
 
     virtual void OnTestProgramEnd(const ::testing::UnitTest& unit_test)
