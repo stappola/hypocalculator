@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.10)
 project(hypocalc)
-add_executable(hypocalc main.cpp hypocalculator.cpp)
-
+add_executable(hypocalc.app main.cpp hypocalculator.cpp triangledata.cpp)
