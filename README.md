@@ -20,6 +20,11 @@ cd googletest
 cmake .  
 make  
 
+cd ../unittest  
+cmake .  
+make  
+
+
 ## Run all tests  
 ./hypocalc_unittest.app  
 
